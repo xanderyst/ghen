@@ -24,16 +24,28 @@ const handler = NextAuth({
         await connectToDB();
 
         // check if user already exists
-        const userExists = await User.findOne({ email: profile.email });
-
+        const existingUser = await User.findOne({ email: profile.email });
+        console.log('existingUser', existingUser);
         // if not, create a new document and save user in MongoDB
-        if (!userExists) {
+        if (!existingUser) {
           await User.create({
             email: profile.email,
             username: profile.name.replace(" ", "").toLowerCase(),
             image: profile.picture,
           });
         }
+        const {lastLoggedIn, today} = existingUser;
+        const todayDate = new Date();
+        const loggedInToday = lastLoggedIn.setHours(0,0,0,0) === todayDate.setHours(0,0,0,0);
+        if (!loggedInToday) {
+          existingUser.today = {
+            guessHistory: [],
+            charactersArray: [],
+            characterIndex: 0
+          }
+        }
+        existingUser.lastLoggedIn = todayDate;
+        await existingUser.save();
 
         return true
       } catch (error) {

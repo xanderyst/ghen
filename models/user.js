@@ -13,6 +13,69 @@ const UserSchema = new Schema({
   },
   image: {
     type: String,
+  },
+  progress: {
+    charactersToReview: [
+      {
+        unicode: {
+          type: String
+        },
+        character: {
+          type: String
+        }
+      }
+    ],
+    charactersLearned: [
+      {
+        unicode: {
+          type: String
+        },
+        character: {
+          type: String
+        }
+      }
+    ],
+    characterStartIndex: {
+      type: Number,
+      default: 0
+    },
+    grade: {
+      type: Number,
+      default: 1
+    }
+  },
+  today: {
+    guessHistory: [
+      {
+        unicode: {
+          type: String
+        },
+        character: {
+          type: String
+        },
+        attempt: {
+          type: Number
+        }
+      }
+    ],
+    charactersArray: [
+      {
+        unicode: {
+          type: String
+        },
+        character: {
+          type: String
+        }
+      }
+    ],
+    characterIndex: {
+      type: Number,
+      default: 0
+    }
+  },
+  lastLoggedIn: {
+    type: Date,
+    default: Date.now
   }
 });
 
