@@ -37,7 +37,6 @@ const tones = ['¯', 'ˊ', 'ˇ', 'ˋ', '˙'];
 
 let characterMap = {};
 let characters = firstGrade;
-let showLoading = true;
 // characters.forEach(char => {
 //     characterMap[`${char.unicode}`] = char;
 // });
@@ -87,8 +86,9 @@ const App = () => {
     // const [characters, setCharacters] = useState(firstGrade);
     // const [characterMap, setCharacterMap] = useState({})
 
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     console.log('session', session);
+    console.log('status', status);
     const user = session?.user;
     const dailyLimit = 10;
 
@@ -155,7 +155,6 @@ const App = () => {
             const fullChar = characterMap[defaultDisplayArray[0].unicode];
             console.log('fullChar', fullChar);
             setCharacterToDisplay(fullChar);
-            showLoading = false;
             // setProgress(defaultProgess);
             // setCurrentCharacterIndex(0);
             return;
@@ -163,7 +162,6 @@ const App = () => {
 
         const fetchUser = async () => {
             try {
-                showLoading = true;
                 const response = await fetch(`/api/users/${user.id}`);
                 const data = await response.json();
                 const tempToday = data.today;
@@ -202,7 +200,6 @@ const App = () => {
                         setShowContinue(true);
                     }
                 }
-                showLoading = false;
                 console.log('showContinue', showContinue);
             } catch (error) {
                 console.log(error);
@@ -411,7 +408,7 @@ const App = () => {
                         <div key={index} className={`inline-block m-1 p-2 w-12 h-12 rounded ${element.attempt <= 5 ? ['bg-green-400', 'bg-yellow-400', 'bg-orange-400', 'bg-red-400', 'bg-gray-400'][element.attempt - 1] : 'bg-gray-400'}`}>{element.character}</div>
                 ))} 
             </div>}
-            {showLoading ? (<div className="text-center">
+            {(status === 'loading') ? (<div className="text-center">
               <Typography variant="h1">Loading...</Typography>
             </div>) :
             showLevelUp ? (<div className="text-center">
