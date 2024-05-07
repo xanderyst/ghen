@@ -30,9 +30,9 @@ function renderSVG(tone, width, height, fill) {
     return null;
 }
 
-function ToneButton({ addTone, tone, width, height, fill}) {
+function ToneButton({ addTone, tone, width, height, fill, size}) {
     return (
-        <Button onClick={() => addTone(tone)} size="lg" ripple="light">
+        <Button onClick={() => addTone(tone)} size={size} ripple="light">
           {renderSVG(tone, width, height, fill)}
         </Button>
       );

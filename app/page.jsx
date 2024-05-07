@@ -455,55 +455,65 @@ const App = () => {
                 {attempt === 3 && <Typography variant="h4">Translation: {characterToDisplay.translation}</Typography>}
                 {attempt === 4 && <Typography variant="h4">Type the answer below: {characterToDisplay.pinyin}</Typography>}
             </div>
-            <div className="text-center">
+            <div className="text-center flex flex-col items-center m-auto">
                 <br />
-                  <Input
-                    type="text"
-                    size="md"
-                    value={guess}
-                    onChange={handleGuessInputChange}
-                    placeholder='Enter Pinyin'
-                    onKeyPress={(e) => {
-                        if (e.key === 'Enter') {
-                        handleSubmit();
-                        }
-                    }}
-                  />
-                  <Typography
-                    variant="small"
-                    color="gray"
-                    className="mt-2 flex items-center gap-1 font-normal"
-                >
-                    <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="-mt-px h-4 w-4"
-                    >
-                    <path
-                        fillRule="evenodd"
-                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
-                        clipRule="evenodd"
+                  <div className="flex w-72 flex-col items-center">
+                    <Input
+                        type="text"
+                        size="md"
+                        value={guess}
+                        onChange={handleGuessInputChange}
+                        placeholder='Enter Pinyin'
+                        onKeyPress={(e) => {
+                            if (e.key === 'Enter') {
+                                handleSubmit();
+                            }
+                        }}
                     />
-                    </svg>
-                    Remember to enter tone!
-                  </Typography>
-                  <br />
-                  <Button
-                    size="md"
-                    color={guess ? "gray" : "blue-gray"}
-                    disabled={!guess}
-                    onClick={handleSubmit}
-                  >
-                    Submit
-                  </Button>
+                    <Typography
+                        variant="small"
+                        color="gray"
+                        className="mt-2 flex items-center gap-1 font-normal"
+                    >
+                        <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="-mt-px h-4 w-4"
+                        >
+                        <path
+                            fillRule="evenodd"
+                            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                            clipRule="evenodd"
+                        />
+                        </svg>
+                        Remember to enter tone!
+                    </Typography>
+                    <br />
+                    <Button
+                        size="md"
+                        className="w-24"
+                        color={guess ? "gray" : "blue-gray"}
+                        disabled={!guess}
+                        onClick={handleSubmit}
+                    >
+                        Submit
+                    </Button>
+                  </div>
                 <br />
                 <br />
                 <Typography variant="h4">You can enter tones using the following buttons</Typography>
                 <br />
-                <div className="flex w-max gap-4">
+                {/* Mobile Navigation */}
+                <div className="sm:hidden flex relative gap-4">
+                    {tones.map(tone => (
+                            <ToneButton key={tone} addTone={addTone} tone={tone} width="15px" height="15px" fill="#FFFFFF" size="sm"></ToneButton>
+                        ))}
+                </div>
+                {/* Desktop Navigation */}
+                <div className="sm:flex hidden flex w-max gap-4">
                 {tones.map(tone => (
-                        <ToneButton key={tone} addTone={addTone} tone={tone} width="15px" height="15px" fill="#FFFFFF"></ToneButton>
+                        <ToneButton key={tone} addTone={addTone} tone={tone} width="15px" height="15px" fill="#FFFFFF" size="lg"></ToneButton>
                     ))}
                 </div>
             </div>
