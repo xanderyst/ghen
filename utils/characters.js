@@ -29,7 +29,7 @@ export const firstGrade = [
     { character: '好', unicode: '597D', pinyin: 'haoˇ', phrase: '好朋友', sentence: '他是我的好朋友。', image: 'hao_peng_you.jpg', translation: 'Good' },
     { character: '多', unicode: '591A', pinyin: 'duo¯', phrase: '多雲', sentence: '今天是一個多雲的天氣。', image: 'duo_yun.jpg', translation: 'Many' },
     { character: '長', unicode: '957F', pinyin: 'zhangˇ', phrase: '長大', sentence: '他希望長大後成為一名醫生。', image: 'zhang_da.jpg', translation: 'Grow up' },
-    { character: '要', unicode: '8981', pinyin: 'yaoˋ', phrase: '要求', sentence: '他提出了一些要求。', image: 'yao_qiu.jpg', translation: 'Want' },
+    { character: '要', unicode: '8981', pinyin: 'yaoˋ', phrase: '我要', sentence: '我要買東西。', image: 'yao_qiu.jpg', translation: 'Want' },
     { character: '水', unicode: '6C34', pinyin: 'shuiˇ', phrase: '水果', sentence: '我喜歡吃各種各樣的水果。', image: 'shui_guo.jpg', translation: 'Water' },
     { character: '光', unicode: '5149', pinyin: 'guang¯', phrase: '光明', sentence: '光明將會戰勝黑暗。', image: 'guang_ming.jpg', translation: 'Light' },
     { character: '玩', unicode: '73A9', pinyin: 'wanˊ', phrase: '玩具', sentence: '他在玩具店買了一個玩具。', image: 'wan_ju.jpg', translation: 'Play' },
