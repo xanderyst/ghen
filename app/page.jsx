@@ -40,6 +40,7 @@ let characters = firstGrade;
 // characters.forEach(char => {
 //     characterMap[`${char.unicode}`] = char;
 // });
+
 const loadCharactersAndBuildMap = (grade) => {
     switch (grade) {
         case 1:
@@ -123,6 +124,27 @@ const App = () => {
             // setProgress(defaultProgess);
             // setCurrentCharacterIndex(0);
             return;
+        }
+
+        if(typeof window !== 'undefined') {
+            window.clearToday = async () => {
+                const emptyToday = {
+                    guessHistory: [],
+                    charactersArray: [],
+                    characterIndex: 0
+                }
+                try {
+                    const response = await fetch(`/api/users/${user.id}/today`, {
+                        method: "PATCH",
+                        body: JSON.stringify({
+                        ...emptyToday
+                        }),
+                    });
+                    return response;
+                } catch (error) {
+                    console.log(error);
+                }
+            }
         }
 
         const fetchUser = async () => {
