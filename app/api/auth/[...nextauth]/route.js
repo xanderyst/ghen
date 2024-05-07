@@ -44,7 +44,7 @@ const handler = NextAuth({
             characterIndex: 0
           }
         }
-        existingUser.lastLoggedIn = todayDate;
+        existingUser.lastLoggedIn = new Date();
         await existingUser.save();
 
         return true

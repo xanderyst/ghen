@@ -83,47 +83,12 @@ const App = () => {
     const [guessHistory, setGuessHistory] = useState([]);
     const [showLevelUp, setShowLevelUp] = useState(false);
     const [showContinue, setShowContinue] = useState(false);
-    // const [characters, setCharacters] = useState(firstGrade);
-    // const [characterMap, setCharacterMap] = useState({})
 
     const { data: session, status } = useSession();
     console.log('session', session);
     console.log('status', status);
     const user = session?.user;
     const dailyLimit = 10;
-
-    // const loadCharactersAndBuildMap = (grade) => {
-    //     let tempCharacters;
-    //     switch (grade) {
-    //         case 1:
-    //             tempCharacters = firstGrade;
-    //             break;
-    //         case 2:
-    //             tempCharacters = secondGrade;
-    //             break;
-    //         case 3:
-    //             tempCharacters = thirdGrade;
-    //             break;
-    //         case 4:
-    //             tempCharacters = fourthGrade;
-    //             break;
-    //         case 5:
-    //             tempCharacters = fifthGrade;
-    //             break;
-    //         case 6:
-    //             tempCharacters = sixthGrade;
-    //             break;
-    //         default: 
-    //             tempCharacters = firstGrade;
-    //             break;
-    //     }
-    //     let tempCharacterMap = {};
-    //     tempCharacters.forEach(char => {
-    //         tempCharacterMap[`${char.unicode}`] = char;
-    //     });
-    //     setCharacters(characters);
-    //     setCharacterMap(tempCharacterMap);
-    // };
 
     const buildCharactersToDisplay = (progressInput) => {
         const array = [];
@@ -293,16 +258,27 @@ const App = () => {
         
     }
 
+    const findIndexOfChar = (reviewArray, charToFind) => {
+        const { unicode, character } = charToFind;
+        console.log('charToFind', charToFind);
+        const charInReview = reviewArray.find(char => char.character === charToFind.character);
+        console.log('charInReview', charInReview);
+        return reviewArray.indexOf(charInReview);
+    }
+
     const handleSubmit = async () => {
         const newProgress = cloneDeep(progress);
-        const lastCharIndex = newProgress.charactersToReview.length - 1;
-        const charToPeek = newProgress.charactersToReview[lastCharIndex];
-        const isCharFromReview = isSameCharacter(charToPeek, characterToDisplay);
+        const indexOfCharDisplay = findIndexOfChar(newProgress.charactersToReview, characterToDisplay);
+        console.log('indexOfCharDisplay', indexOfCharDisplay);
+        const reviewHasChar = indexOfCharDisplay > -1;
+        console.log('reviewHasChar', reviewHasChar);
+
         const { unicode, character } = characterToDisplay;
         const processedCharacter = { unicode, character };
         if (guess === characterToDisplay.pinyin) {
-            if (isCharFromReview) {
-                newProgress.charactersToReview.pop();
+            if (reviewHasChar) {
+                newProgress.charactersToReview.splice(indexOfCharDisplay, 1);
+                console.log('newProgress after splice', newProgress);
             } else {
                 newProgress.characterStartIndex++;
             }
@@ -316,8 +292,8 @@ const App = () => {
             setAttempt(attempt + 1);
             return;
         } else {
-            if (isCharFromReview) {
-                newProgress.charactersToReview.pop();
+            if (reviewHasChar) {
+                newProgress.charactersToReview.splice(indexOfCharDisplay, 1);
                 newProgress.charactersToReview.unshift(processedCharacter);
             } else {
                 newProgress.characterStartIndex++;

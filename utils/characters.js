@@ -64,7 +64,7 @@ export const firstGrade = [
     { character: '糖', unicode: '7CD6', pinyin: 'tangˊ', phrase: '糖果', sentence: '我喜歡吃糖果。', image: 'tang_guo.jpg', translation: 'Candy' },
     { character: '秋', unicode: '79CB', pinyin: 'qiu¯', phrase: '秋天', sentence: '秋天的葉子變黃了。', image: 'qiu_tian.jpg', translation: 'Autumn' },
     { character: '千', unicode: '5343', pinyin: 'qian¯', phrase: '千萬', sentence: '千萬不要忘記了。', image: 'qian_wan.jpg', translation: 'Thousand' },
-    { character: '子', unicode: '5B50', pinyin: 'ziˇ', phrase: '小孩子', sentence: '小孩子很喜歡玩。', image: 'xiao_hai_zi.jpg', translation: 'Child' },
+    { character: '子', unicode: '5B50', pinyin: 'ziˇ', phrase: '母子', sentence: '他們母子倆長得很像。', image: 'xiao_hai_zi.jpg', translation: 'Child' },
     { character: '空', unicode: '7A7A', pinyin: 'kong¯', phrase: '空氣', sentence: '新鮮的空氣令人愉悅。', image: 'kong_qi.jpg', translation: 'Air' },
     { character: '說', unicode: '8BF4', pinyin: 'shuo¯', phrase: '說話', sentence: '他很會說話。', image: 'shuo_hua.jpg', translation: 'Speak' },
     { character: '早', unicode: '65E9', pinyin: 'zaoˇ', phrase: '早上', sentence: '我每天早上七點起床。', image: 'zao_shang.jpg', translation: 'Early' },
