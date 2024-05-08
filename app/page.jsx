@@ -31,12 +31,14 @@ import {
   Typography,
   ButtonGroup, 
   Button, 
-  Input } from '@material-tailwind/react';
+  Input,
+Spinner } from '@material-tailwind/react';
 
 const tones = ['¯', 'ˊ', 'ˇ', 'ˋ', '˙'];
 
 let characterMap = {};
 let characters = firstGrade;
+let loading;
 // characters.forEach(char => {
 //     characterMap[`${char.unicode}`] = char;
 // });
@@ -86,8 +88,6 @@ const App = () => {
     const [showContinue, setShowContinue] = useState(false);
 
     const { data: session, status } = useSession();
-    console.log('session', session);
-    console.log('status', status);
     const user = session?.user;
     const dailyLimit = 10;
 
@@ -108,6 +108,8 @@ const App = () => {
     }
 
     useEffect(() => {
+        console.log('session', session);
+        console.log('status', status);
         console.log('beginning useeffect user', user);
         if (!user) {
             // const defaultProgess = {
@@ -149,6 +151,7 @@ const App = () => {
 
         const fetchUser = async () => {
             try {
+                loading = true;
                 const response = await fetch(`/api/users/${user.id}`);
                 const data = await response.json();
                 const tempToday = data.today;
@@ -188,6 +191,7 @@ const App = () => {
                     }
                 }
                 console.log('showContinue', showContinue);
+                loading = false;
             } catch (error) {
                 console.log(error);
             }
@@ -406,7 +410,8 @@ const App = () => {
                         <div key={index} className={`inline-block m-1 p-2 w-12 h-12 rounded ${element.attempt <= 5 ? ['bg-green-400', 'bg-yellow-400', 'bg-orange-400', 'bg-red-400', 'bg-gray-400'][element.attempt - 1] : 'bg-gray-400'}`}>{element.character}</div>
                 ))} 
             </div>}
-            {(status === 'loading') ? (<div className="text-center">
+            {(status === 'loading' || loading) ? (<div className="flex flex-row text-center">
+              <Spinner className="h-12 w-12 mr-4 mt-2" />
               <Typography variant="h1">Loading...</Typography>
             </div>) :
             showLevelUp ? (<div className="text-center">

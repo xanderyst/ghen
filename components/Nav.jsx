@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
 const Nav = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const sessionUser = session?.user;
   const isUserLoggedIn = !!sessionUser;
   const [providers, setProviders] = useState(null);
@@ -35,7 +35,8 @@ const Nav = () => {
 
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
-        {isUserLoggedIn ? (
+        {(status === 'loading') ? (<></>) :
+            isUserLoggedIn ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
               Create Post
@@ -62,7 +63,7 @@ const Nav = () => {
                 <button 
                   type="button" 
                   key={provider.name}
-                  onClick={() => signIn(provider.id)}
+                  onClick={(e) => {e.preventDefault(); signIn(provider.id);}}
                   className="black_btn"
                   >
                 Sign In
@@ -73,7 +74,8 @@ const Nav = () => {
       </div>
       {/* Mobile Navigation */}
       <div className="sm:hidden flex relative">
-        { isUserLoggedIn ? (
+        { (status === 'loading') ? (<></>) :
+        isUserLoggedIn ? (
           <div className="flex">
             <Image 
                 src={sessionUser.image}
@@ -120,7 +122,7 @@ const Nav = () => {
                 <button 
                   type="button" 
                   key={provider.name}
-                  onClick={() => signIn(provider.id)}
+                  onClick={(e) => {e.preventDefault(); signIn(provider.id);}}
                   className="black_btn"
                   >
                 Sign In
