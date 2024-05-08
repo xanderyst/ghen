@@ -20,7 +20,7 @@
 // export default Home
 "use client";
 import ToneButton from '@components/ToneButton';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, toLower } from 'lodash';
 import { firstGrade, secondGrade, thirdGrade, fourthGrade, fifthGrade, sixthGrade } from '@utils/characters';
 import { useState, useEffect } from 'react';
 import { useSession } from "next-auth/react";
@@ -301,7 +301,7 @@ const App = () => {
 
         const { unicode, character } = characterToDisplay;
         const processedCharacter = { unicode, character };
-        if (guess === characterToDisplay.pinyin) {
+        if (toLower(guess) === characterToDisplay.pinyin) {
             if (reviewHasChar) {
                 newProgress.charactersToReview.splice(indexOfCharDisplay, 1);
                 console.log('newProgress after splice', newProgress);
