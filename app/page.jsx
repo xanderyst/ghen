@@ -214,7 +214,7 @@ const App = () => {
         console.log('text', text);
         const character = characterToDisplay.character;
         console.log('characterToDisplay', characterToDisplay);
-        if (text.includes(character)) {
+        if (text && text.includes(character)) {
             return text.split('').map((char, index) => (
                 char === character ? <span key={index} style={{ color: 'red' }}>{char}</span> : char
             ));
@@ -410,7 +410,7 @@ const App = () => {
                         <div key={index} className={`inline-block m-1 p-2 w-12 h-12 rounded ${element.attempt <= 5 ? ['bg-green-400', 'bg-yellow-400', 'bg-orange-400', 'bg-red-400', 'bg-gray-400'][element.attempt - 1] : 'bg-gray-400'}`}>{element.character}</div>
                 ))} 
             </div>}
-            {(status === 'loading' || loading) ? (<div className="flex flex-row text-center">
+            {loading ? (<div className="flex flex-row text-center">
               <Spinner className="h-12 w-12 mr-4 mt-2" />
               <Typography variant="h1">Loading...</Typography>
             </div>) :
@@ -424,7 +424,7 @@ const App = () => {
                     Yay!
                   </Button>
             </div>) :
-            currentCharacterIndex >= charactersToDisplay.length && charactersToDisplay.length < dailyLimit ?
+            session && currentCharacterIndex >= charactersToDisplay.length && charactersToDisplay.length < dailyLimit ?
             (<div>
                 <br />
                 <Typography variant="h1">End of Grade {progress.grade}</Typography>
@@ -501,6 +501,15 @@ const App = () => {
                                 <ToneButton key={tone} addTone={addTone} tone={tone} width="15px" height="15px" fill="#FFFFFF" size="sm"></ToneButton>
                             ))}
                     </div>
+                    <Button
+                        size="sm"
+                        className="sm:hidden mt-4 w-24"
+                        color={guess ? "gray" : "blue-gray"}
+                        disabled={!guess}
+                        onClick={handleSubmit}
+                    >
+                    Submit
+                    </Button>
                     <Button
                         size="md"
                         className="sm:flex hidden w-24"
