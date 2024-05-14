@@ -23,12 +23,12 @@ const Keyboard = ({ onKeyPress }) => {
   return (
     <div className="sm:hidden">
       {keys.map((row, rowIndex) => (
-        <div key={rowIndex} className="flex justify-center mb-2">
+        <div key={rowIndex} className="flex justify-center mb-1">
           {row.map((key) => (
             <Button
               key={key}
               ripple="light"
-              className={`m-0.5 p-3 text-white rounded focus:outline-none ${
+              className={`m-0.5 p-3 h-12 text-white rounded focus:outline-none ${
                 key === 'Backspace' ? 'bg-red-500' : key === 'Enter' ? 'bg-green-500' : ''
               }`}
               onClick={() => handleKeyClick(key)}
