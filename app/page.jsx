@@ -73,8 +73,6 @@ const loadCharactersAndBuildMap = (grade) => {
     });
 };
 loadCharactersAndBuildMap(1);
-console.log('characters', characters);
-console.log('characterMap', characterMap);
 
 const App = () => {
     const [charactersToDisplay, setCharactersToDisplay] = useState([]);
@@ -123,7 +121,6 @@ const App = () => {
     useEffect(() => {
         console.log('session', session);
         console.log('status', status);
-        console.log('beginning useeffect user', user);
         if (!user) {
             // const defaultProgess = {
             //     charactersLearned: [],
@@ -131,10 +128,8 @@ const App = () => {
             //     characterStartIndex: 1
             // }
             const defaultDisplayArray = buildCharactersToDisplay(progress)
-            console.log('defaultDisplayArray', defaultDisplayArray);
             setCharactersToDisplay(defaultDisplayArray);
             const fullChar = characterMap[defaultDisplayArray[0].unicode];
-            console.log('fullChar', fullChar);
             setCharacterToDisplay(fullChar);
             // setProgress(defaultProgess);
             // setCurrentCharacterIndex(0);
@@ -170,8 +165,6 @@ const App = () => {
                 const tempToday = data.today;
                 const tempProgress = data.progress;
                 loadCharactersAndBuildMap(tempProgress.grade);
-                console.log('fetchuser characters', characters);
-                console.log('fetchuser characterMap', characterMap);
                 setProgress(tempProgress);
 
                 let displayArray;
@@ -180,14 +173,12 @@ const App = () => {
                 } else {
                     displayArray = buildCharactersToDisplay(tempProgress);
                 }
-                console.log('displayArray', displayArray);
                 setCharactersToDisplay(displayArray);
 
                 const characterIndex = tempToday.characterIndex || 0;
                 setCurrentCharacterIndex(characterIndex);
                 if (characterIndex < dailyLimit && characterIndex < displayArray.length) {
                     const fullChar = characterMap[displayArray[characterIndex].unicode];
-                    console.log('fullChar', fullChar);
                     setCharacterToDisplay(fullChar);
                 }
 
@@ -198,12 +189,10 @@ const App = () => {
 
                 if (tempToday.characterIndex === dailyLimit) {
                     const allTenCorrect = tempToday.guessHistory.every(guess => guess.attempt === 1);
-                    console.log('allTenCorrect', allTenCorrect);
                     if (allTenCorrect) {
                         setShowContinue(true);
                     }
                 }
-                console.log('showContinue', showContinue);
                 loading = false;
             } catch (error) {
                 console.log(error);
@@ -232,9 +221,7 @@ const App = () => {
     };
     
     const highlightGuessedCharacter = (text) => {
-        console.log('text', text);
         const character = characterToDisplay.character;
-        console.log('characterToDisplay', characterToDisplay);
         if (text && text.includes(character)) {
             return text.split('').map((char, index) => (
                 char === character ? <span key={index} style={{ color: 'red' }}>{char}</span> : char
@@ -245,7 +232,6 @@ const App = () => {
 
     //update api
     const updateProgress = async (input) => {
-        console.log('updateProgress input', input);
         try {
             const response = await fetch(`/api/users/${user.id}/progress`, {
               method: "PATCH",
@@ -260,7 +246,6 @@ const App = () => {
     };
 
     const updateToday = async (input) => {
-        console.log('updateToday input', input);
         try {
             const response = await fetch(`/api/users/${user.id}/today`, {
               method: "PATCH",
@@ -279,9 +264,13 @@ const App = () => {
         return char.character === charDisplay.character;
     }
 
+    const disableEnter = () => {
+        const correctGuess = toLower(guess) === characterToDisplay.pinyin || (guess === characterToDisplay.bopomofo);
+        return attempt >=4 && !correctGuess;
+    }
+
     const handleNext = async () => {
         const displayArray = buildCharactersToDisplay(progress);
-        console.log('handleNext displayArray', displayArray);
         const newToday = {
             guessHistory: [],
             charactersArray: displayArray,
@@ -307,25 +296,20 @@ const App = () => {
 
     const findIndexOfChar = (reviewArray, charToFind) => {
         const { unicode, character } = charToFind;
-        console.log('charToFind', charToFind);
         const charInReview = reviewArray.find(char => char.character === charToFind.character);
-        console.log('charInReview', charInReview);
         return reviewArray.indexOf(charInReview);
     }
 
     const handleSubmit = async () => {
         const newProgress = cloneDeep(progress);
         const indexOfCharDisplay = findIndexOfChar(newProgress.charactersToReview, characterToDisplay);
-        console.log('indexOfCharDisplay', indexOfCharDisplay);
         const reviewHasChar = indexOfCharDisplay > -1;
-        console.log('reviewHasChar', reviewHasChar);
 
         const { unicode, character } = characterToDisplay;
         const processedCharacter = { unicode, character };
         if (toLower(guess) === characterToDisplay.pinyin || (guess === characterToDisplay.bopomofo)) {
             if (reviewHasChar) {
                 newProgress.charactersToReview.splice(indexOfCharDisplay, 1);
-                console.log('newProgress after splice', newProgress);
             } else {
                 newProgress.characterStartIndex++;
             }
@@ -359,10 +343,7 @@ const App = () => {
         if (newProgress.characterStartIndex >= characters.length && !hasCharactersToReview) {
             newProgress.grade++;
             newProgress.characterStartIndex = 0;
-            console.log('newProgress', newProgress);
             loadCharactersAndBuildMap(newProgress.grade);
-            console.log('characters', characters);
-            console.log('characterMap', characterMap);
             setShowLevelUp(true);
             // update characters to read from
             // update charactermap
@@ -372,7 +353,6 @@ const App = () => {
 
         if (newToday.characterIndex === dailyLimit) {
             const allTenCorrect = newToday.guessHistory.every(guess => guess.attempt === 1);
-            console.log('allTenCorrect', allTenCorrect);
             if (allTenCorrect) {
                 setShowContinue(true);
             }
@@ -390,8 +370,6 @@ const App = () => {
             tempNewProgress = newProgress;
             tempNewToday = newToday;
         }
-        console.log('tempNewProgress', tempNewProgress);
-        console.log('tempNewToday', tempNewToday);
 
         setProgress(tempNewProgress);
         setGuessHistory(tempNewToday.guessHistory);
@@ -518,7 +496,7 @@ const App = () => {
                         Remember to enter tone!
                     </Typography>
                     <br />
-                    <Keyboard onKeyPress={handleKeyPress} />
+                    <Keyboard onKeyPress={handleKeyPress} disableEnter={disableEnter()}/>
                   </div>
                 <br />
             </div>

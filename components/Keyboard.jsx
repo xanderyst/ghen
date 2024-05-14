@@ -23,7 +23,7 @@ const BackspaceIcon = () => (
   </svg>
 );
 
-const Keyboard = ({ onKeyPress }) => {
+const Keyboard = ({ onKeyPress, disableEnter }) => {
   const [isEnglish, setIsEnglish] = useState(true);
 
   const toggleKeyboard = () => {
@@ -98,6 +98,7 @@ const Keyboard = ({ onKeyPress }) => {
               key ? (
                 <Button
                   ripple="light"
+                  disabled={key==='Enter' && disableEnter}
                   className={`p-3 h-12 text-white rounded focus:outline-none ${
                     (key === 'Switch to Pinyin' || isKeyTone(key)) ? 'bg-gray-500' : key === 'Backspace' ? 'bg-red-500' : key === 'Enter' ? 'bg-green-500' : ''
                   }`}

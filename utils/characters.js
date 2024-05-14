@@ -143,7 +143,7 @@ export const firstGrade = [
     { character: '樣', unicode: '6A23', bopomofo: 'ㄧㄤˋ', pinyin: 'yangˋ', phrase: '樣子', sentence: '這個樣子很奇怪。', translation: 'Style' },
     { character: '顏', unicode: '984F', bopomofo: 'ㄧㄢˊ', pinyin: 'yanˊ', phrase: '顏色', sentence: '我喜歡這種顏色。', translation: 'Color' },
     { character: '送', unicode: '9001', bopomofo: 'ㄙㄨㄥˋ', pinyin: 'songˋ', phrase: '送禮', sentence: '他決定送一份禮物。', translation: 'Send' },
-    { character: '什', unicode: '4EC0', bopomofo: 'ㄕㄣˊ', pinyin: 'shenˊ', phrase: '什麼', sentence: '你想要什麼？', translation: 'What' },
+    { character: '什', unicode: '4EC0', bopomofo: 'ㄕㄜˊ', pinyin: 'shenˊ', phrase: '什麼', sentence: '你想要什麼？', translation: 'What' },
     { character: '麼', unicode: '9EBC', bopomofo: 'ㄇㄜ˙', pinyin: 'me˙', phrase: '什麼', sentence: '這是什麼意思？', translation: 'What' },
     { character: '呢', unicode: '5462', bopomofo: 'ㄋㄜ˙', pinyin: 'ne˙', phrase: '呢', sentence: '你怎麼了呢？', translation: 'Particle' },
     { character: '媽', unicode: '5ABD', bopomofo: 'ㄇㄚ', pinyin: 'ma¯', phrase: '媽媽', sentence: '媽媽在廚房。', translation: 'Mother' },
