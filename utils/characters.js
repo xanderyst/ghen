@@ -153,7 +153,7 @@ export const firstGrade = [
     { character: '爸', unicode: '7238', bopomofo: 'ㄅㄚˋ', pinyin: 'baˋ', phrase: '爸爸', sentence: '爸爸在工作。', translation: 'Dad' },
     { character: '姐', unicode: '59D0', bopomofo: 'ㄐㄧㄝˇ', pinyin: 'jieˇ', phrase: '姐姐', sentence: '姐姐正在學習。', translation: 'Older sister' },
     { character: '會', unicode: '6703', bopomofo: 'ㄏㄨㄟˋ', pinyin: 'huiˋ', phrase: '會議', sentence: '會議在哪裡舉行？', translation: 'Can' },
-    { character: '張', unicode: '5F35', bopomofo: 'ㄓㄤ', pinyin: 'zhang¯', phrase: '張紙', sentence: '這張紙是空的。', translation: 'Sheet' },
+    { character: '張', unicode: '5F35', bopomofo: 'ㄓㄤ', pinyin: 'zhang¯', phrase: 'ㄧ張紙', sentence: '這張紙是空的。', translation: 'Sheet' },
     { character: '卡', unicode: '5361', bopomofo: 'ㄎㄚˇ', pinyin: 'kaˇ', phrase: '卡片', sentence: '他給我一張卡片。', translation: 'Card' },
     { character: '片', unicode: '7247', bopomofo: 'ㄆㄧㄢˋ', pinyin: 'pianˋ', phrase: '卡片', sentence: '雲朵像片片棉花。', translation: 'Slice' },
     { character: '給', unicode: '7D66', bopomofo: 'ㄍㄟˇ', pinyin: 'geiˇ', phrase: '給我', sentence: '請給我那本書。', translation: 'Give' },
