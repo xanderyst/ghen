@@ -423,7 +423,7 @@ const App = () => {
                         <div key={index} className={`inline-block m-1 p-2 w-12 h-12 rounded ${element.attempt <= 5 ? ['bg-green-400', 'bg-yellow-400', 'bg-orange-400', 'bg-red-400', 'bg-gray-400'][element.attempt - 1] : 'bg-gray-400'}`}>{element.character}</div>
                 ))} 
             </div>}
-            {loading ? (<div className="flex flex-row text-center">
+            {(status === 'loading' || loading) ? (<div className="flex flex-row text-center">
               <Spinner className="h-12 w-12 mr-4 mt-2" />
               <Typography variant="h1">Loading...</Typography>
             </div>) :
@@ -524,7 +524,7 @@ const App = () => {
                         size="md"
                         value={guess}
                         className="sm:hidden"
-                        readOnly="true"
+                        readOnly={true}
                         onChange={handleGuessInputChange}
                         placeholder='Enter Pinyin'
                         onKeyPress={(e) => {
