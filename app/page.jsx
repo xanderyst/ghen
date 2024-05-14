@@ -130,14 +130,14 @@ const App = () => {
         }
 
         if(typeof window !== 'undefined') {
-            window.clearToday = async () => {
+            window.clearToday = async (userId=user.id) => {
                 const emptyToday = {
                     guessHistory: [],
                     charactersArray: [],
                     characterIndex: 0
                 }
                 try {
-                    const response = await fetch(`/api/users/${user.id}/today`, {
+                    const response = await fetch(`/api/users/${userId}/today`, {
                         method: "PATCH",
                         body: JSON.stringify({
                         ...emptyToday

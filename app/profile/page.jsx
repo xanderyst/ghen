@@ -11,6 +11,7 @@ const MyProfile = () => {
   const { data: session } = useSession();
 
   const [myPosts, setMyPosts] = useState([]);
+  const [progress, setProgress] = useState({characterStartIndex: 0, charactersLearned: [], charactersToReview: [], grade: 1});
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -20,7 +21,21 @@ const MyProfile = () => {
       setMyPosts(data);
     };
 
-    if (session?.user.id) fetchPosts();
+    const fetchUser = async (userId) => {
+      try {
+          const response = await fetch(`/api/users/${userId}`);
+          const data = await response.json();
+          const tempProgress = data.progress;
+          setProgress(tempProgress);
+      } catch (error){
+        console.log(error);
+      }
+    }
+
+    if (session?.user.id) {
+      fetchPosts();
+      fetchUser(session?.user.id);
+    }
   }, [session?.user.id]);
 
   const handleEdit = (post) => {
@@ -49,12 +64,17 @@ const MyProfile = () => {
   };
 
   return (
+    // <Profile
+    //   name='My'
+    //   desc='Welcome to your personalized profile page. Share your exceptional prompts and inspire others with the power of your imagination'
+    //   data={myPosts}
+    //   handleEdit={handleEdit}
+    //   handleDelete={handleDelete}
+    // />
     <Profile
       name='My'
-      desc='Welcome to your personalized profile page. Share your exceptional prompts and inspire others with the power of your imagination'
-      data={myPosts}
-      handleEdit={handleEdit}
-      handleDelete={handleDelete}
+      desc='Welcome to your personalized profile page.'
+      progress={progress}
     />
   );
 };
