@@ -83,7 +83,7 @@ export const firstGrade = [
     { character: '人', unicode: '4EBA', pinyin: 'renˊ', phrase: '人類', sentence: '人類是社會的一部分。', image: 'ren_lei.jpg', translation: 'People' },
     { character: '開', unicode: '5F00', pinyin: 'kai¯', phrase: '開心', sentence: '她很開心。', image: 'kai_xin.jpg', translation: 'Happy' },
     { character: '心', unicode: '5FC3', pinyin: 'xin¯', phrase: '心情', sentence: '我現在的心情很好。', image: 'xin_qing.jpg', translation: 'Heart' },
-    { character: '嗎', unicode: '541E', pinyin: 'ma˙', phrase: '好不好', sentence: '你好嗎？', image: 'hao_bu_hao.jpg', translation: 'Question' },
+    { character: '嗎', unicode: '541E', pinyin: 'ma˙', phrase: '好嗎    ', sentence: '你好嗎？', image: 'hao_bu_hao.jpg', translation: 'Question' },
     { character: '也', unicode: '4E5F', pinyin: 'yeˇ', phrase: '也許', sentence: '也許是我記錯了。', image: 'ye_xu.jpg', translation: 'Also' },
     { character: '笑', unicode: '7B11', pinyin: 'xiaoˋ', phrase: '笑臉', sentence: '他對著我笑了。', image: 'xiao_lian.jpg', translation: 'Laugh' },
     { character: '哈', unicode: '54C8', pinyin: 'ha¯', phrase: '哈哈', sentence: '他大聲笑了。', image: 'ha_ha.jpg', translation: 'Haha' },

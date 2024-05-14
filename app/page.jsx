@@ -495,9 +495,15 @@ const App = () => {
                         Remember to enter tone!
                     </Typography>
                     <br />
+                    {/* Mobile Navigation */}
+                    <div className="sm:hidden flex relative gap-4">
+                        {tones.map(tone => (
+                                <ToneButton key={tone} addTone={addTone} tone={tone} width="15px" height="15px" fill="#FFFFFF" size="sm"></ToneButton>
+                            ))}
+                    </div>
                     <Button
                         size="md"
-                        className="w-24"
+                        className="sm:flex hidden w-24"
                         color={guess ? "gray" : "blue-gray"}
                         disabled={!guess}
                         onClick={handleSubmit}
@@ -507,14 +513,8 @@ const App = () => {
                   </div>
                 <br />
                 <br />
-                <Typography variant="h4">You can enter tones using the following buttons</Typography>
+                <Typography className="sm:flex hidden" variant="h4">You can enter tones using the following buttons</Typography>
                 <br />
-                {/* Mobile Navigation */}
-                <div className="sm:hidden flex relative gap-4">
-                    {tones.map(tone => (
-                            <ToneButton key={tone} addTone={addTone} tone={tone} width="15px" height="15px" fill="#FFFFFF" size="sm"></ToneButton>
-                        ))}
-                </div>
                 {/* Desktop Navigation */}
                 <div className="sm:flex hidden flex w-max gap-4">
                 {tones.map(tone => (
