@@ -25,7 +25,7 @@ const Nav = () => {
       <Link href="/" className="flex gap-2 flex-center">
         <Image 
           alt="Promptopia Logo"
-          src="/assets/images/logo.svg"
+          src="/assets/images/translate.svg"
           width={30}
           height={30}
           className="object-contain"
