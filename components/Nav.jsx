@@ -35,8 +35,7 @@ const Nav = () => {
 
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
-        {(status === 'loading') ? (<></>) :
-            isUserLoggedIn ? (
+        { isUserLoggedIn ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
               Create Post
@@ -74,8 +73,7 @@ const Nav = () => {
       </div>
       {/* Mobile Navigation */}
       <div className="sm:hidden flex relative">
-        { (status === 'loading') ? (<></>) :
-        isUserLoggedIn ? (
+        { isUserLoggedIn ? (
           <div className="flex">
             <Image 
                 src={sessionUser.image}
