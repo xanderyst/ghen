@@ -20,6 +20,7 @@
 // export default Home
 "use client";
 import ToneButton from '@components/ToneButton';
+import Keyboard from '@components/Keyboard';
 import { cloneDeep, toLower } from 'lodash';
 import { firstGrade, secondGrade, thirdGrade, fourthGrade, fifthGrade, sixthGrade } from '@utils/characters';
 import { useState, useEffect } from 'react';
@@ -208,6 +209,18 @@ const App = () => {
 
     const handleGuessInputChange =  (event) => {
       setGuess(event.target.value);
+    };
+
+    const handleKeyPress = (key) => {
+        if (key === 'Backspace') {
+            setGuess(guess.slice(0, -1));
+        } else if (key === 'Enter') {
+            handleSubmit();
+        } else if (key === 'Clear') {
+            setGuess('');
+        } else {
+            setGuess(guess + key);
+        }
     };
     
     const highlightGuessedCharacter = (text) => {
@@ -462,7 +475,7 @@ const App = () => {
             </div>
             <div className="text-center flex flex-col items-center m-auto">
                 <br />
-                  <div className="flex w-72 flex-col items-center">
+                  <div className="sm:flex hidden flex w-72 flex-col items-center">
                     <Input
                         type="text"
                         size="md"
@@ -496,20 +509,7 @@ const App = () => {
                     </Typography>
                     <br />
                     {/* Mobile Navigation */}
-                    <div className="sm:hidden flex relative gap-4">
-                        {tones.map(tone => (
-                                <ToneButton key={tone} addTone={addTone} tone={tone} width="15px" height="15px" fill="#FFFFFF" size="sm"></ToneButton>
-                            ))}
-                    </div>
-                    <Button
-                        size="sm"
-                        className="sm:hidden mt-4 w-24"
-                        color={guess ? "gray" : "blue-gray"}
-                        disabled={!guess}
-                        onClick={handleSubmit}
-                    >
-                    Submit
-                    </Button>
+                    <Keyboard onKeyPress={handleKeyPress} />
                     <Button
                         size="md"
                         className="sm:flex hidden w-24"
@@ -519,6 +519,43 @@ const App = () => {
                     >
                         Submit
                     </Button>
+                  </div>
+                  <div className="sm:hidden flex w-72 flex-col items-center">
+                    <Input
+                        type="text"
+                        size="md"
+                        value={guess}
+                        className="sm:hidden"
+                        readOnly="true"
+                        onChange={handleGuessInputChange}
+                        placeholder='Enter Pinyin'
+                        onKeyPress={(e) => {
+                            if (e.key === 'Enter') {
+                                handleSubmit();
+                            }
+                        }}
+                    />
+                                        <Typography
+                        variant="small"
+                        color="gray"
+                        className="mt-2 flex items-center gap-1 font-normal"
+                    >
+                        <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="-mt-px h-4 w-4"
+                        >
+                        <path
+                            fillRule="evenodd"
+                            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                            clipRule="evenodd"
+                        />
+                        </svg>
+                        Remember to enter tone!
+                    </Typography>
+                    <br />
+                    <Keyboard onKeyPress={handleKeyPress} />
                   </div>
                 <br />
                 <br />
