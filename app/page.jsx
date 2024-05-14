@@ -508,11 +508,9 @@ const App = () => {
                         Remember to enter tone!
                     </Typography>
                     <br />
-                    {/* Mobile Navigation */}
-                    <Keyboard onKeyPress={handleKeyPress} />
                     <Button
                         size="md"
-                        className="sm:flex hidden w-24"
+                        className="w-24"
                         color={guess ? "gray" : "blue-gray"}
                         disabled={!guess}
                         onClick={handleSubmit}
@@ -535,7 +533,7 @@ const App = () => {
                             }
                         }}
                     />
-                                        <Typography
+                    <Typography
                         variant="small"
                         color="gray"
                         className="mt-2 flex items-center gap-1 font-normal"
@@ -554,6 +552,13 @@ const App = () => {
                         </svg>
                         Remember to enter tone!
                     </Typography>
+                    <br />
+                    {/* Mobile Navigation */}
+                    <div className="flex w-max gap-4">
+                    {tones.map(tone => (
+                            <ToneButton key={tone} addTone={addTone} tone={tone} width="15px" height="15px" fill="#FFFFFF" size="sm"></ToneButton>
+                        ))}
+                    </div>
                     <br />
                     <Keyboard onKeyPress={handleKeyPress} />
                   </div>
