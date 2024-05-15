@@ -100,7 +100,7 @@ const Keyboard = ({ onKeyPress, disableEnter }) => {
                   ripple="light"
                   disabled={key==='Enter' && disableEnter}
                   className={`p-3 h-12 text-white rounded focus:outline-none ${
-                    (key === 'Switch to Pinyin' || isKeyTone(key)) ? 'bg-gray-500' : key === 'Backspace' ? 'bg-red-500' : key === 'Enter' ? 'bg-green-500' : ''
+                    key === 'Backspace' ? 'bg-red-500' : key === 'Enter' ? 'bg-green-500' : ''
                   }`}
                   onClick={() => handleKeyClick(key)}
                 >
@@ -115,7 +115,7 @@ const Keyboard = ({ onKeyPress, disableEnter }) => {
       ))}
       {isEnglish && <Button
         onClick={toggleKeyboard}
-        className="mt-1 mb-2 p-3 text-white bg-gray-500 rounded focus:outline-none"
+        className="mt-1 mb-2 p-3 text-white rounded focus:outline-none"
       >
         Switch to ㄅㄆㄇㄈ
       </Button>}
