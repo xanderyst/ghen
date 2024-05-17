@@ -493,7 +493,7 @@ const App = () => {
                             clipRule="evenodd"
                         />
                         </svg>
-                        Remember to enter tone!
+                        Pinyin format (pinyin+tone): 一 = yi¯
                     </Typography>
                     <br />
                     <Keyboard onKeyPress={handleKeyPress} disableEnter={disableEnter()}/>
