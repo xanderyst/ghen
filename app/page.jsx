@@ -23,7 +23,7 @@ import Keyboard from '@components/Keyboard';
 import { cloneDeep, toLower } from 'lodash';
 import { firstGrade, secondGrade, thirdGrade, fourthGrade, fifthGrade, sixthGrade } from '@utils/characters';
 import { useState, useEffect } from 'react';
-import { useSession } from "next-auth/react";
+import { useSession, getCsrfToken } from "next-auth/react";
 import { 
   Card,
   CardBody,
@@ -105,6 +105,29 @@ const App = () => {
         }
         return array;
     }
+
+    const [csrfToken, setCsrfToken] = useState('');
+
+    useEffect(() => {
+        async function fetchCsrfToken() {
+            const result = await getCsrfToken();
+            if (!result) {
+                throw new Error('Can not sign in without a CSRF token');
+            }
+            setCsrfToken(result);
+        }
+
+        /*
+        Wait until session is fetched before obtaining csrfToken 
+        to prevent synchronization issues caused by both 
+        /api/auth/session and /api/auth/csrf setting the cookie. 
+        Only happens in dev environment.
+        */
+        if (status !== 'loading') {
+            fetchCsrfToken();
+        }
+    }, [status]);
+
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
