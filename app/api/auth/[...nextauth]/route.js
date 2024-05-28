@@ -32,8 +32,11 @@ export const authOptions = {
             email: profile.email,
             username: profile.login,
             image: profile.picture,
+            lastLoggedIn: new Date()
           });
         }
+        return true;
+        
         const {lastLoggedIn, today} = existingUser;
         const todayDate = new Date();
         const loggedInToday = lastLoggedIn.setHours(0,0,0,0) === todayDate.setHours(0,0,0,0);
