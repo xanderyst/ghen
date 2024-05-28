@@ -183,7 +183,7 @@ export const firstGrade = [
     { character: '站', unicode: '7AD9', bopomofo: 'ㄓㄢˋ', pinyin: 'zhanˋ', phrase: '站立', sentence: '請站起來。', translation: 'Stand' },
     { character: '魚', unicode: '9B5A', bopomofo: 'ㄩˊ', pinyin: 'yuˊ', phrase: '魚類', sentence: '海裡有很多魚。', translation: 'Fish' },
     { character: '游', unicode: '6CF3', bopomofo: 'ㄧㄡˊ', pinyin: 'youˊ', phrase: '游泳', sentence: '孩子們喜歡游泳。', translation: 'Swim' },
-    { character: '哇', unicode: '54C7', bopomofo: 'ㄨㄚˊ', pinyin: 'waˊ', phrase: '哇', sentence: '哇！這麼多魚！', translation: 'Wow' },
+    { character: '哇', unicode: '54C7', bopomofo: 'ㄨㄚ˙', pinyin: 'waˊ', phrase: '哇', sentence: '哇！這麼多魚！', translation: 'Wow' },
     { character: '青', unicode: '9752', bopomofo: 'ㄑㄧㄥ', pinyin: 'qing¯', phrase: '青蛙', sentence: '池塘裡有很多青蛙。', translation: 'Green' },
     { character: '蛙', unicode: '86D9', bopomofo: 'ㄨㄚ', pinyin: 'wa¯', phrase: '青蛙', sentence: '青蛙在池塘裡唱歌。', translation: 'Frog' },
     { character: '幫', unicode: '5E6B', bopomofo: 'ㄅㄤ', pinyin: 'bang¯', phrase: '幫忙', sentence: '她幫忙做家務。', translation: 'Help' },

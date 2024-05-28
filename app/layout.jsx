@@ -1,7 +1,6 @@
 import '@styles/globals.css';
 import Nav from '@components/Nav';
 import Provider from '@components/Provider';
-
 export const metadata = {
     title: "Ghen",
     description: 'Learn Chinese Characters Daily'
