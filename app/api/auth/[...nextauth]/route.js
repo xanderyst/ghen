@@ -30,7 +30,7 @@ export const authOptions = {
         if (!existingUser) {
           await User.create({
             email: profile.email,
-            username: profile.name.replace(" ", "").toLowerCase(),
+            username: profile.login,
             image: profile.picture,
           });
         }
