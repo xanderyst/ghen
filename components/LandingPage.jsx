@@ -31,7 +31,7 @@ const LandingPage = ({ startGame }) => {
         </Typography>
         <CharacterDisplay character={sampleCharacter} attempt={1} />
         <Typography className="pt-6" variant="h5">
-        Format for pinyin is pinyin + tone. 
+        Format for pinyin is pinyin + tone. Remember ¯ is also a tone in pinyin!
         <br></br>
         Answer: xiaoˇ
         <br></br>
