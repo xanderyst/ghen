@@ -10,6 +10,7 @@ import LoadingSpinner from '@components/LoadingSpinner';
 import LevelUpMessage from '@components/LevelUpMessage';
 import ContinueMessage from '@components/ContinueMessage';
 import LandingPage from '@components/LandingPage';
+import SignInDialog from '@components/SignInDialog';
 import { loadCharactersAndBuildMap, buildCharactersToDisplay } from '@utils/characterUtils';
 import { Typography } from '@material-tailwind/react';
 const dailyLimit = 10;
@@ -32,7 +33,9 @@ const App = () => {
   const user = session?.user;
   const [csrfToken, setCsrfToken] = useState('');
   const [gameStarted, setGameStarted] = useState(false);
+  const [open, setOpen] = useState(true);
 
+  const handleOpen = () => setOpen(!open);
   const startGame = () => setGameStarted(!gameStarted);
   const handleGuessInputChange = (event) => {
     setGuess(event.target.value);
@@ -288,6 +291,7 @@ const App = () => {
   return (
     <div>
       {!!guessHistory.length && <GuessHistory guessHistory={guessHistory} />}
+      { (!user && status !== 'loading' && gameStarted) && <SignInDialog open={open} handleOpen={handleOpen}/> }
       { (!user && status !== 'loading' && !gameStarted) ? <LandingPage startGame={startGame}/> :
         (status === 'loading' || loading) ? <LoadingSpinner /> :
         showLevelUp ? <LevelUpMessage grade={progress.grade} handleNext={handleNext} /> :
