@@ -183,7 +183,6 @@ const App = () => {
   };
 
   const disableEnter = () => {
-    console.log('characterToDisplay', characterToDisplay);
     const correctGuess = toLower(guess) === characterToDisplay.pinyin || (guess === characterToDisplay.bopomofo);
     return attempt >=4 && !correctGuess;
   }
@@ -251,16 +250,12 @@ const App = () => {
           const data = await response.json();
           const tempToday = data.today;
           const tempProgress = data.progress;
-          console.log('tempProgress', tempProgress);
           const { characters: userCharacters, characterMap: userCharacterMap } = loadCharactersAndBuildMap(tempProgress.grade);
-          console.log('userCharacters', userCharacters);
-          console.log('userCharacterMap', userCharacterMap);
           setCharacters(userCharacters);
           setCharacterMap(userCharacterMap);
           setProgress(tempProgress);
 
           let displayArray = tempToday?.charactersArray?.length ? tempToday.charactersArray : buildCharactersToDisplay(tempProgress, userCharacters, userCharacterMap, dailyLimit);
-          console.log('displayArray', displayArray);
           setCharactersToDisplay(displayArray);
 
           const characterIndex = tempToday.characterIndex || 0;
@@ -291,9 +286,9 @@ const App = () => {
   return (
     <div>
       {!!guessHistory.length && <GuessHistory guessHistory={guessHistory} />}
-      { (!user && status !== 'loading' && gameStarted) && <SignInDialog open={open} handleOpen={handleOpen}/> }
-      { (!user && status !== 'loading' && !gameStarted) ? <LandingPage startGame={startGame}/> :
-        (status === 'loading' || loading) ? <LoadingSpinner /> :
+      { (!user && gameStarted) && <SignInDialog open={open} handleOpen={handleOpen}/> }
+      { (!user && !gameStarted) ? <LandingPage startGame={startGame}/> :
+        (loading) ? <LoadingSpinner /> :
         showLevelUp ? <LevelUpMessage grade={progress.grade} handleNext={handleNext} /> :
           session && currentCharacterIndex >= charactersToDisplay.length && charactersToDisplay.length < dailyLimit ?
             <div><Typography variant="h1">End of Grade {progress.grade}</Typography></div> :
