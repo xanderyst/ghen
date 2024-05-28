@@ -286,9 +286,9 @@ const App = () => {
   return (
     <div>
       {!!guessHistory.length && <GuessHistory guessHistory={guessHistory} />}
-      { (!user && gameStarted) && <SignInDialog open={open} handleOpen={handleOpen}/> }
-      { (!user && !gameStarted) ? <LandingPage startGame={startGame}/> :
-        (loading) ? <LoadingSpinner /> :
+      { (!user && status !== 'loading' && gameStarted) && <SignInDialog open={open} handleOpen={handleOpen}/> }
+      { (!user && status !== 'loading' && !gameStarted) ? <LandingPage startGame={startGame}/> :
+        (status === 'loading' || loading) ? <LoadingSpinner /> :
         showLevelUp ? <LevelUpMessage grade={progress.grade} handleNext={handleNext} /> :
           session && currentCharacterIndex >= charactersToDisplay.length && charactersToDisplay.length < dailyLimit ?
             <div><Typography variant="h1">End of Grade {progress.grade}</Typography></div> :

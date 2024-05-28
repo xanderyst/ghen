@@ -56,7 +56,7 @@ const Nav = () => {
           </div>
         ) : (
           <>
-            { providers && 
+            { status !== 'loading' && providers && 
             Object.values(providers).map(
               (provider) => ( 
                 <button 
@@ -114,7 +114,7 @@ const Nav = () => {
           </div>
         ) : (
           <>
-            { providers && 
+            { status !== 'loading' && providers && 
             Object.values(providers).map(
               (provider) => ( 
                 <button 
