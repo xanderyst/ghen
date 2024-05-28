@@ -5,16 +5,7 @@ import { Typography, Button } from '@material-tailwind/react';
 import CharacterDisplay from './CharacterDisplay';
 
 const sampleCharacter = 
-{
-    character: "五",
-    unicode: "4E94",
-    bopomofo: "ㄨˇ",
-    pinyin: "wǔ",
-    phrase: "五個",
-    sentence: "我有五個蘋果。",
-    image: "five_apples.jpg",
-    translation: "Five"
-};
+{ character: '小', unicode: '5C0F', bopomofo: 'ㄒㄧㄠˇ', pinyin: 'xiaoˇ', phrase: '小狗', sentence: '小狗很可愛。', image: 'xiao_gou.jpg', translation: 'Small' };
 
 const LandingPage = ({ startGame }) => {
   const { data: session, status } = useSession();
@@ -42,7 +33,7 @@ const LandingPage = ({ startGame }) => {
         <Typography className="pt-6" variant="h5">
         Format for pinyin is pinyin + tone. 
         <br></br>
-        Answer: wuˇ
+        Answer: xiaoˇ
         <br></br>
         <br></br>
         If you get 10 in a row you get to keep on playing!
