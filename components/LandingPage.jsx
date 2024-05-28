@@ -36,7 +36,7 @@ const LandingPage = ({ startGame }) => {
         Answer: xiaoˇ
         <br></br>
         <br></br>
-        If you get 10 in a row you get to keep on playing!
+        If you get 10 in a row you get to keep on playing! Sign in to save progress.
         </Typography>
         <div className='mx-auto pt-6 flex w-max gap-4'>
           { providers && 
