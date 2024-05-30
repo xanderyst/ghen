@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
+import { signIn, signOut, useSession, getProviders, getCsrfToken } from 'next-auth/react';
 import { Typography, Button } from '@material-tailwind/react';
 import CharacterDisplay from './CharacterDisplay';
 import { signInToMyApp } from '@utils/signInUtil';
@@ -16,6 +16,21 @@ const LandingPage = ({ startGame }) => {
   const isUserLoggedIn = !!sessionUser;
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
+  const [csrfToken, setCsrfToken] = useState('');
+
+  useEffect(() => {
+    async function fetchCsrfToken() {
+      const result = await getCsrfToken();
+      if (!result) {
+        throw new Error('Can not sign in without a CSRF token');
+      }
+      setCsrfToken(result);
+    }
+
+    if (status !== 'loading') {
+      fetchCsrfToken();
+    }
+  }, [status]);
 
   useEffect(() => {
     const setUpProviders = async () => {
@@ -25,6 +40,7 @@ const LandingPage = ({ startGame }) => {
     }
     setUpProviders();
   }, []);
+  
   return (
     <div className="m-4">
         <Typography className="text-center" variant="h3">
