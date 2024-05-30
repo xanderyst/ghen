@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react';
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 import { Typography, Button } from '@material-tailwind/react';
 import CharacterDisplay from './CharacterDisplay';
+import { signInToMyApp } from '@utils/signInUtil';
+import isWebview from 'is-ua-webview';
+import LoadingSpinner from './LoadingSpinner';
 
 const sampleCharacter = 
 { character: '小', unicode: '5C0F', bopomofo: 'ㄒㄧㄠˇ', pinyin: 'xiaoˇ', phrase: '小狗', sentence: '小狗很可愛。', image: 'xiao_gou.jpg', translation: 'Small' };
@@ -13,6 +16,7 @@ const LandingPage = ({ startGame }) => {
   const isUserLoggedIn = !!sessionUser;
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
+
   useEffect(() => {
     const setUpProviders = async () => {
       const response = await getProviders();
@@ -46,7 +50,7 @@ const LandingPage = ({ startGame }) => {
                     ripple="light"
                     variant="outlined"
                     key={provider.name}
-                    onClick={(e) => {e.preventDefault(); signIn(provider.id);}}
+                    onClick={(e) => {e.preventDefault(); signInToMyApp(provider.id);}}
                 >
                 Sign In
                 </Button>))

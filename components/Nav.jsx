@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
+import { signInToMyApp } from '@utils/signInUtil';
 
 const Nav = () => {
   const { data: session, status } = useSession();
@@ -62,7 +63,7 @@ const Nav = () => {
                 <button 
                   type="button" 
                   key={provider.name}
-                  onClick={(e) => {e.preventDefault(); signIn(provider.id);}}
+                  onClick={(e) => {e.preventDefault(); signInToMyApp(provider.id);}}
                   className="black_btn"
                   >
                 Sign In
@@ -120,7 +121,7 @@ const Nav = () => {
                 <button 
                   type="button" 
                   key={provider.name}
-                  onClick={(e) => {e.preventDefault(); signIn(provider.id);}}
+                  onClick={(e) => {e.preventDefault(); signInToMyApp(provider.id);}}
                   className="black_btn"
                   >
                 Sign In
